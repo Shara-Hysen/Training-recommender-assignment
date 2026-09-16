@@ -2,9 +2,11 @@
 
 import pandas as pd
 
+
 def load_workouts() -> pd.DataFrame:
     """Läser in träningsdata från CSV-filen."""
     return pd.read_csv("data/workouts.csv")
+
 
 def load_users() -> pd.DataFrame:
     """Läser in sparad användardata från CSV-filen."""
@@ -27,16 +29,3 @@ def save_user(user_data: dict) -> None:
         )
 
     users.to_csv("data/users.csv", index=False)
-
-
-def get_top_matches() -> pd.DataFrame:
-    """Sammanställer hur många användare som fått varje träningsform som bästa matchning."""
-    users = load_users()
-
-    top_matches = (
-        users["top_match"]
-        .value_counts()
-        .reset_index()
-    )
-
-    return top_matches

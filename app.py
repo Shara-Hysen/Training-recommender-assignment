@@ -4,9 +4,8 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+from data_handler import load_workouts, save_user
 from recommender import get_recommendations
-from data_handler import load_users, load_workouts, save_user
-from user_statistics import get_top_match_counts
 
 # Konfigurerar Streamlit-sidans titel, ikon och layout.
 st.set_page_config(
@@ -24,8 +23,6 @@ def get_workouts() -> pd.DataFrame:
 
 workouts = get_workouts()
 
-users = load_users()
-
 # Visar appens titel, introduktion och information om matchningsmodellen.
 st.title("✨ Hitta din träningsform")
 
@@ -41,9 +38,11 @@ st.info(
 
 
 # Skapar formuläret där användaren anger sina träningsmål och preferenser.
-st.subheader("Berätta lite om hur du vill träna")
 
 if "name" not in st.session_state:
+    st.subheader("👋 Välkommen!")
+    st.write("Börja med att skriva ditt namn för att komma igång.")
+
     with st.form("name_form"):
         name = st.text_input(
             "Vad heter du?",
@@ -57,7 +56,12 @@ if "name" not in st.session_state:
         st.rerun()
 
 if "name" in st.session_state:
-    st.write(f"👋 Hej {st.session_state['name']}!")   
+    st.write(f"👋 Hej {st.session_state['name']}!")
+    st.subheader("Berätta lite om hur du vill träna")
+    st.write(
+        "Svara på några korta frågor så hittar vi träningsformer "
+        "som matchar dina preferenser."
+    )
 
     with st.form("workout_form"):
 
@@ -240,7 +244,7 @@ if "name" in st.session_state:
         # Skapar procentetiketter som ska visas i staplarna.
         chart_data["label"] = (
             chart_data["match_percent"].round().astype(int).astype(str) + " %"
-    )
+        )
         # Placerar de vita procentetiketterna inuti staplarna.
         text = alt.Chart(chart_data).mark_text(
             align="right",
@@ -257,7 +261,7 @@ if "name" in st.session_state:
         # Kombinerar staplarna med procentetiketterna och visar diagrammet i appen.
         chart = bars + text
 
-        st.altair_chart(chart, use_container_width=True)
+        st.altair_chart(chart, width="stretch")
         
 
         st.caption(
@@ -271,6 +275,4 @@ if "name" in st.session_state:
             st.success("Dina inställningar har sparats!")
 
 
-users = load_users()
-top_match_stats = get_top_match_counts(users)
 

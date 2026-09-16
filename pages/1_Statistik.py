@@ -24,10 +24,6 @@ st.dataframe(
     hide_index=True
 )
 
-top_match_stats["Etikett"] = (
-    top_match_stats["Andel (%)"].round().astype(int).astype(str) + " %"
-)
-
 chart = alt.Chart(top_match_stats).mark_arc(
     innerRadius=50
 ).encode(
