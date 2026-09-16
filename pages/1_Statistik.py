@@ -32,7 +32,18 @@ chart = alt.Chart(top_match_stats).mark_arc(
         "Träningsform:N",
         title="Träningsform",
         scale=alt.Scale(
-            range=["#16B8C4", "#B39DDB", "#4F6FAE", "#81C784"]
+            range=[
+                "#16B8C4",  # turkos
+                "#B39DDB",  # ljus lila
+                "#4F6FAE",  # blå
+                "#81C784",  # mjuk grön
+                "#5BC0EB",  # ljusblå
+                "#9575CD",  # lila
+                "#4DB6AC",  # blågrön
+                "#7986CB",  # lavendelblå
+                "#66BB6A",  # grön
+                "#80CBC4",  # ljus turkos
+            ]
         )
     ),
 
