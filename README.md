@@ -9,6 +9,8 @@ Användaren svarar på frågor om sina träningsmål och preferenser. Appen jäm
 
 Målet med uppgiften är att fördjupa mig i Streamlit och undersöka hur Pythonkod och data kan presenteras i ett interaktivt gränssnitt som även personer utan programmeringskunskaper kan använda.
 
+`workouts.csv` innehåller ett mindre dataset med tio träningsformer som jag själv har sammanställt för projektet. `users.csv` innehåller demodata som används för att demonstrera appens statistikfunktion.
+
 ## Funktionalitet
 
 Appen:
